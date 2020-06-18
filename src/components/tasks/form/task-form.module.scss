@@ -1,0 +1,23 @@
+@import '../../variables';
+
+.container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  input {
+    flex-grow: 1;
+    border: 0;
+    padding: 12px;
+    height: 40px;
+    background: $input-bg;
+  }
+
+  button {
+    border: 0;
+    height: 40px;
+    cursor: pointer;
+    padding: 0 12px;
+  }
+}

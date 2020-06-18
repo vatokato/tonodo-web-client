@@ -1,0 +1,14 @@
+.container {
+  padding: 0 0 30px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.aside {
+  width: 200px;
+  margin-left: 30px;
+}

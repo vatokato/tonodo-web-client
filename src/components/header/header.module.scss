@@ -1,0 +1,70 @@
+@import '../variables';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 4px;
+    width: 36px;
+    height: 44px;
+    z-index: -1;
+    border-radius: 3px;
+    background: $error;
+    opacity: .5;
+  }
+
+  &.connected {
+    &:after {
+      background: $success;
+    }
+  }
+}
+
+.logo-title {
+  color: #000;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: -1px;
+}
+
+.logo-img {
+  height: 50px;
+  margin-right: 5px;
+  fill: $accent;
+}
+
+.top-nav {
+  .link {
+    display: inline-block;
+    margin: 0 0 0 12px;
+    text-decoration: none;
+    color: $default;
+    text-transform: uppercase;
+    letter-spacing: -.5px;
+    font-weight: 500;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
+    padding: 6px 2px;
+
+    &:hover {
+      color: darken($default, 10%);
+    }
+
+    &.active {
+      color: $accent;
+      border-bottom-color: $accent;
+    }
+  }
+}

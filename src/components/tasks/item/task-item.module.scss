@@ -1,0 +1,46 @@
+@import '../../variables';
+
+.item {
+  border: 0;
+  margin-bottom: 5px;
+  padding: 10px;
+  background: $input-bg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .content {
+    display: flex;
+    width: 100%;
+  }
+
+  .title{
+
+  }
+
+  .title-input {
+    background: #ffffff;
+    padding: 1px 4px;
+    margin: 0 0 0 -4px;
+    font-size: 14px;
+    flex-grow: 1;
+  }
+
+  .input-container {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .control {
+    margin-left: 10px;
+  }
+}
+
+.done {
+  opacity: .3;
+
+  .name {
+    text-decoration: line-through;
+
+  }
+}

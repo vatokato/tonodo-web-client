@@ -1,0 +1,36 @@
+import {createActions} from 'redux-actions';
+
+export const {
+  init,
+  loadList,
+  requestList,
+  successList,
+  failureList,
+  changeFolder,
+  changeNewFolderText,
+  addFolder,
+  requestItem,
+  successItem,
+  failureItem,
+  deleteFolder,
+  requestDeleteFolder,
+  successDeleteFolder,
+  failureDeleteFolder,
+} = createActions({
+  INIT: () => ({}),
+  LOAD_LIST: () => ({}),
+  REQUEST_LIST: () => ({}),
+  SUCCESS_LIST: items => items,
+  FAILURE_LIST: error => ({error}),
+  CHANGE_FOLDER: id => ({id}),
+  CHANGE_NEW_FOLDER_TEXT: text => ({text}),
+  ADD_FOLDER: () => ({}),
+  REQUEST_ITEM: () => ({}),
+  SUCCESS_ITEM: item => ({item}),
+  FAILURE_ITEM: error => ({error}),
+  DELETE_FOLDER: id => ({id}),
+  REQUEST_DELETE_FOLDER: () => ({}),
+  SUCCESS_DELETE_FOLDER: item => ({item}),
+  FAILURE_DELETE_FOLDER: error => ({error}),
+}, { prefix: 'task-folders' });
+

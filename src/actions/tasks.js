@@ -1,0 +1,38 @@
+import {createActions} from 'redux-actions';
+
+export const {
+  init,
+  loadList,
+  requestList,
+  successList,
+  failureList,
+  requestItem,
+  successItem,
+  failureItem,
+  addTask,
+  editTaskTitle,
+  deleteTask,
+  successPatchTask,
+  failurePatchTask,
+  doneTask,
+  unDoneTask,
+  changeNewTaskText,
+} = createActions({
+  INIT: () => ({}),
+  LOAD_LIST: () => ({}),
+  REQUEST_LIST: () => ({}),
+  SUCCESS_LIST: tasks => tasks,
+  FAILURE_LIST: error => ({error}),
+  REQUEST_ITEM: () => ({}),
+  SUCCESS_ITEM: item => ({item}),
+  FAILURE_ITEM: error => ({error}),
+  ADD_TASK: text => ({text}),
+  EDIT_TASK_TITLE: task => task,
+  DELETE_TASK: id => ({id}),
+  SUCCESS_PATCH_TASK: item => ({ item }),
+  FAILURE_PATCH_TASK: error => error,
+  DONE_TASK: id => ({id}),
+  UN_DONE_TASK: id => ({id}),
+  CHANGE_NEW_TASK_TEXT: text => ({text}),
+}, { prefix: 'tasks' });
+
