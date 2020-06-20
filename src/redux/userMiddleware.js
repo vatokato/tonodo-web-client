@@ -14,7 +14,7 @@ export default store => next => async action => {
 
   const instance = axios.create({
     baseURL: API_URL,
-    timeout: 1000,
+    timeout: 3000,
     headers: {
       'Content-Type': 'application/json',
     }
