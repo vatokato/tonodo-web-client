@@ -1,7 +1,7 @@
 import {
   init, setSocketStatus,
 } from '../actions/app';
-import { logout, successAuth } from '../actions/user';
+import { logout, successAuth, successReg } from '../actions/user';
 import localDB from "../localDB";
 import {
   changeFolder,
@@ -28,6 +28,7 @@ export default store => next => async action => {
         await store.dispatch(successAuth(user));
       }
       break;
+    case successReg.toString():
     case successAuth.toString():
       store.dispatch(loadTasks());
       store.dispatch(loadFolders());
