@@ -1,11 +1,9 @@
-import db from '../localDB';
-
 const ADD_POST = 'ADD_POST';
 const CHANGE_NEW_POST_TEXT = 'CHANGE_NEW_POST_TEXT';
 const REMOVE_POST = 'REMOVE_POST';
 
 const initialState =  {
-  posts: db.get('posts') || [],
+  posts: [],
   inputText: '',
 };
 
@@ -22,7 +20,6 @@ const blogReducer = (state = initialState, action) => {
           },
           ...state.posts
         ];
-        db.set('posts', posts);
         return {
           ...state,
           inputText: '',
@@ -34,7 +31,6 @@ const blogReducer = (state = initialState, action) => {
       return {...state, inputText: payload.text};
     case REMOVE_POST:
       const newPosts = state.posts.filter(post => post.id !== payload.id);
-      db.set('posts', newPosts);
       return {...state, posts: newPosts};
     default:
       return state;

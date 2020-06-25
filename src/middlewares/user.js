@@ -5,7 +5,6 @@ import {
   successAuth,
   failureAuth, successReg, failureReg, reg, requestReg,
 } from '../actions/user';
-import localDB from "../localDB";
 import { API_URL } from "../constants";
 
 export default store => next => async action => {
@@ -41,11 +40,9 @@ export const authorization = async (state, action, axios) => {
       username,
       password,
     });
-    const user = response.data;
-    localDB.set('user', user);
     return {
       type: successAuth.toString(),
-      payload: user
+      payload: response.data
     };
   } catch (error) {
     const { data } = error.response || {};
@@ -61,11 +58,9 @@ export const registration = async (state, action, axios) => {
       password,
       password2,
     });
-    const user = response.data;
-    localDB.set('user', user);
     return {
       type: successReg.toString(),
-      payload: user
+      payload: response.data
     };
   } catch (error) {
     const { data } = error.response || {};

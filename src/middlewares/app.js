@@ -2,7 +2,6 @@ import {
   init, setSocketStatus,
 } from '../actions/app';
 import { logout, successAuth, successReg } from '../actions/user';
-import localDB from "../localDB";
 import {
   changeFolder,
   loadList as loadFolders,
@@ -17,13 +16,15 @@ import {
   successPatchTask,
 } from "../actions/tasks";
 import { getSocket, removeSocket } from "../socket";
+import { getUser } from "../selectors/user";
 
 export default store => next => async action => {
   next(action);
+  const state = store.getState();
 
   switch(action.type) {
     case init.toString():
-      const user = localDB.get('user') || {};
+      const user = getUser(state);
       if (user._id) {
         await store.dispatch(successAuth(user));
       }
@@ -53,7 +54,6 @@ export default store => next => async action => {
       });
       break;
     case logout.toString():
-      localDB.set('user', {});
       store.dispatch(setFolders([]));
       store.dispatch(changeFolder('1'));
       store.dispatch(setTasks([]));

@@ -5,13 +5,19 @@ import * as serviceWorker from './serviceWorker';
 import { initStore } from './redux/store';
 import { Provider } from 'react-redux';
 import { init as initApp } from './actions/app';
+import { PersistGate } from 'redux-persist/integration/react';
 
-const store = initStore();
-store.dispatch(initApp());
+const { store, persistor } = initStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <PersistGate
+      loading={ null }
+      persistor={ persistor }
+      onBeforeLift={() => store.dispatch(initApp())}
+    >
+      <App/>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );
