@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import { API_URL } from "../constants";
 
 export const getSocket = userId => Socket(userId);
 export const removeSocket = () => {
@@ -7,7 +8,7 @@ export const removeSocket = () => {
 
 function Socket (userId) {
   if (!Socket.instance) {
-    Socket.instance = io('http://localhost:3000', {
+    Socket.instance = io(API_URL, {
       query: {
         test: 1,
         userId

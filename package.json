@@ -4,8 +4,7 @@
   "private": true,
   "homepage": "./",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --hot --host 0.0.0.0 --server localhost:5000",
-    "dev-prod-server": "webpack-dev-server --mode development --hot --host 0.0.0.0 --server 134.0.119.35:5000",
+    "dev": "webpack-dev-server --mode development --hot --host 0.0.0.0",
     "build": "webpack --mode production --server 134.0.119.35:5000"
   },
   "dependencies": {

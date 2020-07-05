@@ -74,18 +74,18 @@ module.exports = (env, argv) => ({
     contentBase: 'src',
     historyApiFallback: true,
     port: 3000,
-    proxy: {
-      '/api/': {
-        target: `http://${argv.server}`,
-        pathRewrite: { '/api/': '' },
-        secure: false,
-        changeOrigin: true,
-      },
-      '/socket.io/': {
-        target: `http://${argv.server}`,
-        secure: false,
-        ws: true,
-      },
-    }
+    // proxy: {
+    //   '/api/': {
+    //     target: `http://134.0.119.35:5000/`,
+    //     pathRewrite: { '/api/': '' },
+    //     secure: false,
+    //     changeOrigin: true,
+    //   },
+    //   '/socket.io/': {
+    //     target: `http://134.0.119.35:5000/`,
+    //     secure: false,
+    //     ws: true,
+    //   },
+    // }
   }
 });

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../constants";
 
 export const getAxios = token => Axios(token);
 
@@ -8,7 +9,7 @@ function Axios (token) {
   }
   if (!Axios.instance[token]) {
     Axios.instance[token] = axios.create({
-      baseURL: 'http://localhost:3000/api/',
+      baseURL: API_URL,
       timeout: 3000,
       headers: token
         ? {
