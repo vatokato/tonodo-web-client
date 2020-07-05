@@ -12,7 +12,9 @@ import {
 
 
 const initialState = {
-  token: '',
+  token: undefined,
+  authError: undefined,
+  regError: undefined,
 };
 
 export default handleActions({
