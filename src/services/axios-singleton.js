@@ -8,7 +8,7 @@ function Axios (token) {
   }
   if (!Axios.instance[token]) {
     Axios.instance[token] = axios.create({
-      baseURL: '/api/',
+      baseURL: 'http://localhost:3000/api/',
       timeout: 3000,
       headers: token
         ? {
