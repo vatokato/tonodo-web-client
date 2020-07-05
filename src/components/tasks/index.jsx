@@ -1,8 +1,11 @@
 import React from 'react';
-import s from './tasks.module.scss';
+import styles from './tasks.scss';
 import TaskForm from './form/task-form';
 import TaskList from './list/task-list';
 import Folders from './folders/folders';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const TasksPage = ({
   newTaskText,
@@ -22,8 +25,8 @@ const TasksPage = ({
   deleteFolder,
 }) => {
   return (
-    <div className={s.container}>
-      <main className={s.content}>
+    <div className={cx('container')}>
+      <main className={cx('content')}>
         <TaskForm
           addNewTask={addNewTask}
           changeNewTaskText={changeNewTaskText}
@@ -39,7 +42,7 @@ const TasksPage = ({
         />
       </main>
 
-      <div className={s.aside}>
+      <div className={cx('aside')}>
         <Folders
           activeFolder={activeFolder}
           folders={folders}

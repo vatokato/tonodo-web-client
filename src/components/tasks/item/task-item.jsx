@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import s from './task-item.module.scss';
+import styles from './task-item.scss';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const TaskItem = ({
   id,
@@ -28,9 +31,9 @@ const TaskItem = ({
   }, []);
 
   return (
-    <div className={`${s.item} ${checked ? s.done : ''}`}>
-      <div className={s.content}>
-        <span className={s['input-container']}>
+    <div className={cx('item', checked && 'done')}>
+      <div className={cx('content')}>
+        <span className={cx('input-container')}>
           <input
             name={`task-${id}`}
             type='checkbox'
@@ -41,7 +44,7 @@ const TaskItem = ({
         {doEdit
         ? (
           <input
-            className={s['title-input']}
+            className={cx('title-input')}
             type='text'
             value={title}
             onChange={e => setTitle(e.target.value)}
@@ -57,7 +60,7 @@ const TaskItem = ({
           )
         : (
           <span
-            className={s.title}
+            className={cx('title')}
             onDoubleClick={(e) => setDoEdit(true)}
           >
             {title}
@@ -65,7 +68,7 @@ const TaskItem = ({
           )
         }
       </div>
-      <div className={s.control}>
+      <div className={cx('control')}>
         <a
           href={`/remove-task/${id}`}
           onClick={e => {

@@ -15,7 +15,7 @@ import {
   successItem as successCreateItem,
   successPatchTask,
 } from "../actions/tasks";
-import { getSocket, removeSocket } from "../socket";
+import { getSocket, removeSocket } from "../services/socket";
 import { getUser } from "../selectors/user";
 
 export default store => next => async action => {

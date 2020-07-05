@@ -1,39 +1,31 @@
-import axios from 'axios';
 import {
   auth,
   requestAuth,
   successAuth,
   failureAuth, successReg, failureReg, reg, requestReg,
 } from '../actions/user';
-import { API_URL } from "../constants";
+import { getAxios } from "../services/axios-singleton";
 
 export default store => next => async action => {
   next(action);
   const state = store.getState();
 
-  const instance = axios.create({
-    baseURL: API_URL,
-    timeout: 3000,
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  });
-
   switch(action.type) {
     case auth.toString():
       store.dispatch(requestAuth());
-      store.dispatch(await authorization(state, action, instance));
+      store.dispatch(await authorization(state, action));
       break;
     case reg.toString():
       store.dispatch(requestReg());
-      store.dispatch(await registration(state, action, instance));
+      store.dispatch(await registration(state, action));
       break;
     default:
       break;
   }
 }
 
-export const authorization = async (state, action, axios) => {
+export const authorization = async (state, action) => {
+  const axios = getAxios();
   const { username, password } = action.payload;
   try {
     const response = await axios.post('/auth', {
@@ -50,7 +42,8 @@ export const authorization = async (state, action, axios) => {
   }
 };
 
-export const registration = async (state, action, axios) => {
+export const registration = async (state, action) => {
+  const axios = getAxios();
   const { username, password, password2 } = action.payload;
   try {
     const response = await axios.post('/reg', {

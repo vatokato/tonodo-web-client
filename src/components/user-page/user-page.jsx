@@ -1,8 +1,11 @@
 import React from 'react';
-import s from './user-page.module.scss';
+import styles from './user-page.scss';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const UserPage = () => (
-  <div className={s.container}>userpage</div>
+  <div className={cx('container')}>userpage</div>
 )
 
 export default UserPage;

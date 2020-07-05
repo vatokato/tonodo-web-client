@@ -1,5 +1,8 @@
 import React from 'react';
-import s     from './blog-page.module.scss';
+import styles from './blog-page.scss';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const BlogPage = ({
   addPost,
@@ -8,27 +11,25 @@ const BlogPage = ({
   posts,
   inputText,
 }) => (
-  <div className={s.wrap}>
-    <div className={s.container}>
+  <div className={cx('wrap')}>
+    <div className={cx('container')}>
       {posts && posts.map((post, index) => (
           <div
             key={index}
-            className={s.item}
+            className={cx('item')}
           >
             <p>{post.text}</p>
             <span
-              className={s.remove}
+              className={cx('remove')}
               onClick={e => removePost(post.id)}
-            >
-              x
-            </span>
+            >x</span>
           </div>
         )
       )}
     </div>
 
     <form
-      className={s['new-post']}
+      className={cx('new-post')}
       onSubmit={e => {
         e.preventDefault();
         addPost();
@@ -38,7 +39,7 @@ const BlogPage = ({
         onChange={(e) => changePostText(e.target.value)}
         value={inputText}
       />
-      <input type='submit' value='New Post' />
+      <input type='submit' value='New Post'/>
     </form>
   </div>
 );

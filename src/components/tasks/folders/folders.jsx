@@ -1,5 +1,8 @@
 import React from 'react';
-import s from './folders.module.scss';
+import styles from './folders.scss';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const Folders = ({
   changeFolder,
@@ -10,21 +13,23 @@ const Folders = ({
   addNewFolder,
   deleteFolder,
 }) => (
-  <div className={s.container}>
-    <ul className={s.folders}>
+  <div className={cx('container')}>
+    <ul className={cx('folders')}>
       {folders && folders.map(({ _id, title, editable }, index) => (
         <li
           key={index}
-          className={activeFolder._id === _id ? s.active : ''}
+          className={cx({
+            active: _id === activeFolder._id,
+          })}
         >
           <span
-            className={s.title}
+            className={cx('title')}
             onClick={() => changeFolder(_id)}
           >
             {title}
           </span>
           {editable && (<span
-            className={s.action}
+            className={cx('action')}
             onClick={() => deleteFolder(_id)}
           >
             x
@@ -38,13 +43,13 @@ const Folders = ({
         e.preventDefault();
         addNewFolder();
       }}
-      className={s.form}>
+      className={cx('form')}>
       <input
         type="text"
         placeholder='Новая папка'
         value={newFolderText}
         onChange={e => changeNewFolderText(e.target.value)}
-        className={s['form-text']}
+        className={cx('form-text')}
       />
       <button>ok</button>
     </form>

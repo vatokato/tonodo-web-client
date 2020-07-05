@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   requestList,
   successList,
@@ -17,36 +16,26 @@ import {
 } from '../actions/taskFolders';
 import { getToken } from "../selectors/user";
 import { getActiveFolder, getNewFolderText } from "../selectors/taskFolders";
-import { API_URL } from "../constants";
+import { getAxios } from "../services/axios-singleton";
 
 export default store => next => async action => {
   next(action);
   const state = store.getState();
-  const token = getToken(state);
-
-  const instance = axios.create({
-    baseURL: API_URL,
-    timeout: 1000,
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    }
-  });
 
   switch (action.type) {
     case loadList.toString():
       store.dispatch(requestList());
-      store.dispatch(await getFolders(state, action, instance));
+      store.dispatch(await getFolders(state, action));
       break;
     case addFolder.toString():
       store.dispatch(requestItem());
-      store.dispatch(await createFolder(state, action, instance));
+      store.dispatch(await createFolder(state, action));
       store.dispatch(changeNewFolderText(''));
       break;
     case deleteFolder.toString():
       const activeFolder = getActiveFolder(state);
       store.dispatch(requestDeleteFolder());
-      store.dispatch(await removeFolder(state, action, instance));
+      store.dispatch(await removeFolder(state, action));
       if(action.payload.id === activeFolder._id) {
         store.dispatch(changeFolder('1'));
       }
@@ -56,7 +45,10 @@ export default store => next => async action => {
   }
 }
 
-export const getFolders = async (store, action, axios) => {
+export const getFolders = async (state, action) => {
+  const token = getToken(state);
+  const axios = getAxios(token);
+
   try {
     const response = await axios.get('/taskFolders');
     return {
@@ -68,7 +60,9 @@ export const getFolders = async (store, action, axios) => {
   }
 };
 
-export const createFolder = async (state, action, axios) => {
+export const createFolder = async (state, action) => {
+  const token = getToken(state);
+  const axios = getAxios(token);
   const title = getNewFolderText(state);
   try {
     const response = await axios.post('/taskFolders', {
@@ -83,7 +77,9 @@ export const createFolder = async (state, action, axios) => {
   }
 };
 
-export const removeFolder = async (state, action, axios) => {
+export const removeFolder = async (state, action) => {
+  const token = getToken(state);
+  const axios = getAxios(token);
   const { id } = action.payload;
   try {
     const { data: response } = await axios.delete(`/taskFolders/${id}`);

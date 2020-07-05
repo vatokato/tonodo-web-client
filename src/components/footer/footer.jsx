@@ -1,8 +1,11 @@
 import React from 'react';
-import s from './footer.module.scss';
+import styles from './footer.scss';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const Footer = () => (
-  <footer className={s.container}>
+  <footer className={cx('container')}>
     &copy; 2020
   </footer>
 );

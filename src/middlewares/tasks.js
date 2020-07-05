@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   requestList,
   successList,
@@ -16,51 +15,43 @@ import {
 import { getNewTaskText } from "../selectors/tasks";
 import { getToken } from "../selectors/user";
 import { getActiveFolder } from "../selectors/taskFolders";
-import { API_URL } from "../constants";
+import { getAxios } from "../services/axios-singleton";
 
 export default store => next => async action => {
   next(action);
   const state = store.getState();
-  const token = getToken(state);
-
-  const instance = axios.create({
-    baseURL: API_URL,
-    timeout: 1000,
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    }
-  });
 
   switch (action.type) {
     case loadList.toString():
       store.dispatch(requestList());
-      store.dispatch(await getTasks(state, action, instance));
+      store.dispatch(await getTasks(state, action));
       break;
     case addTask.toString():
       store.dispatch(requestItem());
-      store.dispatch(await createTask(state, action, instance));
+      store.dispatch(await createTask(state, action));
       store.dispatch(changeNewTaskText(''));
       break;
     case doneTask.toString():
-      store.dispatch(await patchTask({ completed: true }, state, action, instance));
+      store.dispatch(await patchTask({ completed: true }, state, action));
       break;
     case editTaskTitle.toString():
       const { title } = action.payload;
-      store.dispatch(await patchTask({ title }, state, action, instance));
+      store.dispatch(await patchTask({ title }, state, action));
       break;
     case unDoneTask.toString():
-      store.dispatch(await patchTask({ completed: false }, state, action, instance));
+      store.dispatch(await patchTask({ completed: false }, state, action));
       break;
     case deleteTask.toString():
-      store.dispatch(await patchTask({ deleted: true }, state, action, instance));
+      store.dispatch(await patchTask({ deleted: true }, state, action));
       break;
     default:
       break;
   }
 }
 
-export const getTasks = async (store, action, axios) => {
+export const getTasks = async (state, action) => {
+  const token = getToken(state);
+  const axios = getAxios(token);
   try {
     const response = await axios.get('/tasks');
     return {
@@ -72,7 +63,9 @@ export const getTasks = async (store, action, axios) => {
   }
 };
 
-export const createTask = async (state, action, axios) => {
+export const createTask = async (state, action) => {
+  const token = getToken(state);
+  const axios = getAxios(token);
   const title = getNewTaskText(state);
   const { _id: folderId } = getActiveFolder(state);
   try {
@@ -89,7 +82,9 @@ export const createTask = async (state, action, axios) => {
   }
 };
 
-export const patchTask = async (data, state, action, axios) => {
+export const patchTask = async (data, state, action) => {
+  const token = getToken(state);
+  const axios = getAxios(token);
   const { id } = action.payload;
   const activeFolder = getActiveFolder(state);
   console.log(activeFolder);

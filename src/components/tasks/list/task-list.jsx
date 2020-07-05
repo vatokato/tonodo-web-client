@@ -1,6 +1,9 @@
 import React from 'react';
-import s from './task-list.module.scss';
+import styles from './task-list.scss';
 import TaskItem from '../item/task-item';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const TaskList = ({
   items,
@@ -10,7 +13,7 @@ const TaskList = ({
   deleteTask,
 }) => {
   return (
-    <div className={s.list}>
+    <div className={cx('list')}>
       {Array.isArray(items) && items.map(({ _id: id, completed, title }, index) => (
         <TaskItem
           key={index}

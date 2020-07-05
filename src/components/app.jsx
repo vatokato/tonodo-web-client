@@ -1,5 +1,5 @@
 import React from 'react';
-import './app.scss';
+import styles from './app.scss';
 import Header from './header/header';
 import Footer from './footer/footer';
 import UserPage from './user-page/user-page';
@@ -8,6 +8,9 @@ import Blog from '../connectors/blog';
 import Tasks from '../connectors/tasks';
 import AuthForm from "./auth-form/auth-form";
 import RegForm from "./reg-form/reg-form";
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 function App ({
   isAuth,
@@ -20,13 +23,13 @@ function App ({
 }) {
   return (
     <BrowserRouter>
-      <div className='wrapper'>
+      <div className={cx('wrapper')}>
         <Header
           isAuth={isAuth}
           logout={logout}
           isConnected={isConnected}
         />
-        <div className='middle'>
+        <div className={cx('middle')}>
           {isAuth
             ? (
               <Switch>

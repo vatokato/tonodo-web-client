@@ -1,31 +1,37 @@
 import React from 'react';
-import s from './header.module.scss';
+import styles from './header.scss';
 import logo from '../../assets/logo.svg';
 import { NavLink } from 'react-router-dom';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const Header = ({ isAuth, logout, isConnected }) => (
-  <header className={s.container}>
-    <div className={s['left-part']}>
+  <header className={cx('container')}>
+    <div className={cx('left-part')}>
       <NavLink
-        className={isConnected ? `${s.logo} ${s.connected}` : s.logo}
+        className={cx(
+          'logo',
+          isConnected && 'connected'
+        )}
         to='/'
         exact
       >
-        <img src={logo} className={s['logo-img']} alt="logo"/>
-        <span className={s['logo-title']}>Tonodo</span>
+        <img src={logo} className={cx('logo-img')} alt="logo"/>
+        <span className={cx('logo-title')}>Tonodo</span>
       </NavLink>
     </div>
-    <div className={s['top-nav']}>
+    <div className={cx('top-nav')}>
       {isAuth && (
         <>
-          <NavLink to='/' exact className={s.link} activeClassName={s.active}>Задачи</NavLink>
-          <NavLink to='/blog' className={s.link} activeClassName={s.active}>Блог</NavLink>
-          <NavLink to='/settings' className={s.link} activeClassName={s.active}>Настройки</NavLink>
-          <NavLink to='/profile' className={s.link} activeClassName={s.active}>Профиль</NavLink>
+          <NavLink to='/' exact className={cx('link')} activeClassName={cx('active')}>Задачи</NavLink>
+          <NavLink to='/blog' className={cx('link')} activeClassName={cx('active')}>Блог</NavLink>
+          <NavLink to='/settings' className={cx('link')} activeClassName={cx('active')}>Настройки</NavLink>
+          <NavLink to='/profile' className={cx('link')} activeClassName={cx('active')}>Профиль</NavLink>
           <NavLink
             to='/logout'
-            className={s.link}
-            activeClassName={s.active}
+            className={cx('link')}
+            activeClassName={cx('active')}
             onClick={logout}
           >
             Выход

@@ -1,5 +1,8 @@
 import React from 'react';
-import s  from './task-form.module.scss';
+import styles  from './task-form.scss';
+import classnames from 'classnames/bind';
+
+const cx = classnames.bind(styles);
 
 const TaskForm = ({
   newTaskText,
@@ -8,7 +11,7 @@ const TaskForm = ({
 }) => (
   <form
     onSubmit={addNewTask}
-    className={s.container}>
+    className={cx('container')}>
     <input
       type="text"
       placeholder='Новая запись'

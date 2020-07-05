@@ -1,26 +1,5 @@
 @import './variables.scss';
 
-* {
-  box-sizing: border-box;
-}
-body {
-  background: $back;
-  color: $primary;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-  monospace;
-}
-
 .wrapper {
   margin: 0 auto;
   padding: 0 10px;
@@ -36,54 +15,77 @@ code {
   flex-grow: 1;
 }
 
-a {
-  text-decoration: none;
-  color: $link;
-  transition: color .3s;
-
-
-  &:active,
-  &:hover {
-    color: darken($link, 5%);
+:global {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: $back;
+    color: $primary;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
   }
 
-  &.active {
-    color: darken($link, 10%);
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
   }
-}
 
-input[type=submit],
-button,
-.button {
-  border: 0;
-  padding: 5px 10px;
-  cursor: pointer;
-  background: $default;
-  color: $back;
+  a {
+    text-decoration: none;
+    color: $link;
+    transition: color .3s;
 
-  &.accent {
-    background: $link;
+
+    &:active,
+    &:hover {
+      color: darken($link, 5%);
+    }
+
+    &.active {
+      color: darken($link, 10%);
+    }
   }
-}
 
-.input-container {
-  margin-bottom: 5px;
-}
+  input[type=submit],
+  button,
+  .button {
+    border: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    background: $default;
+    color: $back;
 
-input[type=text],
-input[type=password] {
-  border: 0;
-  padding: 10px;
-  background: $input-bg;
-}
+    &.accent {
+      background: $link;
+    }
+  }
 
-textarea {
-  padding: 10px;
-  border: 0;
-  background: $input-bg;
-}
+  .input-container {
+    margin-bottom: 5px;
+  }
 
-.form-error {
-  margin: 10px 0;
-  color: $error;
+  input[type=text],
+  input[type=password] {
+    border: 0;
+    padding: 10px;
+    background: $input-bg;
+  }
+
+  textarea {
+    padding: 10px;
+    border: 0;
+    background: $input-bg;
+  }
+
+  .form-error {
+    margin: 10px 0;
+    color: $error;
+  }
 }
